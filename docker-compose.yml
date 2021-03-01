@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  sample:
+    container_name: sample
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      # below is "anonymous" volume. node_modules directory is overwritten by the mounting of the host directory at runtime.
+      - "/app/node_modules"
+    ports:
+      - 3001:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
